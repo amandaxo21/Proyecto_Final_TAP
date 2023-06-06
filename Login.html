@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function validar() {
+      var usuario = document.getElementById("usuario").value;
+      var contraseña = document.getElementById("contraseña").value;
+      var error = document.getElementById("error");
+
+      if (usuario === "a" && contraseña === "123") {
+        error.style.display = "none";
+        alert("Inicio de sesión exitoso");
+        // Aquí puedes redirigir al usuario a otra página después del inicio de sesión exitoso
+        window.location.href = "./agenda.html";
+
+      } else {
+        error.style.display = "block";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Iniciar Sesión</h1>
+    <form>
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" name="usuario" required>
+
+      <label for="contraseña">Contraseña:</label>
+      <input type="password" id="contraseña" name="contraseña" required>
+
+      <input type="button" value="Iniciar Sesión" class="btn" onclick="validar()">
+
+      <div id="error" class="error" style="display: none;">Credenciales incorrectas. Por favor, inténtalo de nuevo.</div>
+    </form>
+  </div>
+</body>
+</html>

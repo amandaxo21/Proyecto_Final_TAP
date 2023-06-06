@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agenda 2023</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Agenda 2023</h1>
+
+  <form method="POST" action="/ProyectoDentista/citas/guardar_cita.php">
+    <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha" required><br>
+    <label for="hora">Hora:</label>
+    <input type="time" name="hora" required><br>
+    <label for="descripcion">Descripción:</label>
+    <textarea name="descripcion" required></textarea><br>
+    <button type="submit">Guardar Cita</button>
+  </form>
+</body>
+</html>
