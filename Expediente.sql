@@ -7,19 +7,19 @@
 	FechaNacimiento date, 
 	)
 
-	insert into Cliente values ('OM01','Eric OtuÒo Moles',3411456733,'02/09/1999')
+	insert into Cliente values ('OM01','Eric Otu√±o Moles',3411456733,'02/09/1999')
 	insert into Cliente values ('CG02','Pablo Calleja Galvez',3411223345,'12/10/1990')
 	insert into Cliente values ('AL03','Ximena Soledad Villanueva',3415597643,'3/25/1970')
 	insert into Cliente values ('AL04','Octavia del Maza',3416095960,'01/13/1997')
 	insert into Cliente values ('AL05','Luna Pizarro Guerra',3419751979,'10/05/1999')
-	insert into Cliente values ('AL06','Melania Vel·zquez Palacios',3417991882,'05/12/2001')
+	insert into Cliente values ('AL06','Melania Vel√°zquez Palacios',3417991882,'05/12/2001')
 	insert into Cliente values ('AL07','Viviana Rico Contreras',3414110640,'01/10/2009')
-	insert into Cliente values ('AL08','Aureliano Jimenez Vel·zquez',3414074688,'01/11/2002')
-	insert into Cliente values ('AL09','Francisco Jose C·rdenas Hernandez',3416386083,'09/23/2002')
-	insert into Cliente values ('AL10','Aristides MÈndez Iglesias',3417295129,'12/21/2003')
+	insert into Cliente values ('AL08','Aureliano Jimenez Vel√°zquez',3414074688,'01/11/2002')
+	insert into Cliente values ('AL09','Francisco Jose C√°rdenas Hernandez',3416386083,'09/23/2002')
+	insert into Cliente values ('AL10','Aristides M√©ndez Iglesias',3417295129,'12/21/2003')
 	insert into Cliente values ('AL11','Juan Carlos de Galiano Perez',3413059562,'08/05/1991')
-	insert into Cliente values ('AL12','Daniela Gonzalez ExpÛsito',3416053930,'09/30/2004')
-	insert into Cliente values ('AL13','JosÈ Antonio Bastida',3418625723,'01/01/2007')
+	insert into Cliente values ('AL12','Daniela Gonzalez Exp√≥sito',3416053930,'09/30/2004')
+	insert into Cliente values ('AL13','Jos√© Antonio Bastida',3418625723,'01/01/2007')
 	insert into Cliente values ('AL14','Ivan Rosales Santana',3412698865,'10/25/1996')
 	insert into Cliente values ('AL15','Miriam Franco Rivera',419775966,'06/29/2008')
 	insert into Cliente values ('AL16','Rosario Velazquez Campos',3412628396,'11/04/2000')
@@ -36,7 +36,7 @@
 	(
 	Id_Cliente varchar(30) FOREIGN KEY (Id_Cliente) REFERENCES Cliente (Id_Cliente) not null,
 	Correo varchar(50),
-	ContraseÒa varchar(15)
+	Contrase√±a varchar(15)
 	)
 
 	Select * from Usuario
@@ -93,7 +93,7 @@
 	Select * from Antecedentes
 	Insert into Antecedentes values ('001', 'Camaron, cacahuates','Se realizara una extraccion de las muelas del juicio', 'Diabetes')
 	Insert into Antecedentes values ('002', 'nueces','Se realizara un cambio de ligas', 'Enfermedadad en el corazon')
-	Insert into Antecedentes values ('003', 'PiÒa','Se realizara una extraccion de un diente', 'Enfermedad cerebrovascular')
+	Insert into Antecedentes values ('003', 'Pi√±a','Se realizara una extraccion de un diente', 'Enfermedad cerebrovascular')
 	Insert into Antecedentes values ('004', 'Anestesia','Se realizara una limpieza de rutina', 'Hipertension')
 
 	--drop table Antecedentes
@@ -111,4 +111,66 @@
 
 	Insert into Historial values ('001','Hacer gargaras de agua con sal', 'Extraccion de muelas del juicio')
 	Insert into Historial values ('002','Hacer gargaras de agua con sal', 'Extraccion de muelas del juicio')
+	
+		------PROCEDIMIENTOS------
+	BEGIN
+    SET p_existe = 0;
+    SELECT COUNT(*) INTO p_existe
+    FROM Usuarios
+    WHERE nombre = p_usuario AND contrase√±a = p_contrase√±a;
+END
+
+BEGIN
+    INSERT INTO Cita (fecha, hora, descripcion)
+    VALUES (p_fecha, p_hora, p_descripcion);
+END
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Cliente (Id_Cliente, Nombre, Telefono, FechaNacimiento)
+    VALUES (@Id_Cliente, @Nombre, @Telefono, @FechaNacimiento);
+END
+
+CREATE PROCEDURE InsertarUsuario
+    @Id_Cliente varchar(30),
+    @Correo varchar(50),
+    @Contrase√±a varchar(15)
+AS
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Usuario (Id_Cliente, Correo, Contrase√±a)
+    VALUES (@Id_Cliente, @Correo, @Contrase√±a);
+END
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Cita (IdCita, FechaCita, Hora, Id_Cliente)
+    VALUES (@IdCita, @FechaCita, @Hora, @Id_Cliente);
+END
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Expediente (Id_Exp, Id_Cliente)
+    VALUES (@Id_Exp, @Id_Cliente);
+END
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Antecedentes (Id_Exp, Alergia, Analisis, Enfermedades)
+    VALUES (@Id_Exp, @Alergia, @Analisis, @Enfermedades);
+END
+
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Historial (Id_Exp, Tratamiento, Procedimientos)
+    VALUES (@Id_Exp, @Tratamiento, @Procedimientos);
+END
+
 
